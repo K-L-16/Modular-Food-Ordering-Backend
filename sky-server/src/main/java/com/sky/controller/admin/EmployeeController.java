@@ -103,4 +103,37 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     * 第一个参数是path变量，第二个参数是请求体参数
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @Operation(summary = "员工状态修改")
+    public Result updateStatus(@PathVariable("status") Integer status, @RequestParam Long id) {
+        log.info("员工状态修改，状态：{},{}", status,id);
+        employeeService.updateStatus(status, id);
+        return Result.success();
+    }
+    @GetMapping("/{id}")
+    @Operation(summary = "根据id查询员工信息")
+    public Result<EmployeeDTO> getById(@PathVariable Long id) {
+        EmployeeDTO employeeDTO = employeeService.getById(id);
+        return Result.success(employeeDTO);
+    }
+
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @Operation(summary = "员工信息修改")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("员工信息修改：{}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }
