@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: 123456
+
+cloudinary:
+  api-key: 112336228919127
+  api-secret: -ShGCMOU0ZCOcZJIis2UrM9HwLw
+  cloud-name: drdbkkodu
