@@ -11,3 +11,10 @@ cloudinary:
   api-key: 112336228919127
   api-secret: -ShGCMOU0ZCOcZJIis2UrM9HwLw
   cloud-name: drdbkkodu
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: null
+    database: 10

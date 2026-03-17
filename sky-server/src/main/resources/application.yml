@@ -14,7 +14,13 @@ spring:
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
-
+  redis:
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+    database: ${spring.redis.database}
+#  redis默认用的数据库0，他一共有16个数据库
+#不同数据库中的数据是完全隔离的
 
 mybatis:
   #mapper配置文件
@@ -40,7 +46,14 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
-
+    #user的密钥和过期时间
+    user-secret-key: itkl
+    user-ttl: 7200000
+    user-token-name: authentication
+    #微信小程序的东西
+    wechat:
+      app-id: ${sky.wechat.app-id}
+      app-secret: ${sky.wechat.app-secret}
 
 cloudinary:
   cloud-name: ${cloudinary.cloud-name}
