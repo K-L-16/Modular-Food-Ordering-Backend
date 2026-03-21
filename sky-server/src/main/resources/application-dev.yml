@@ -8,9 +8,9 @@ sky:
     password: 123456
 
 cloudinary:
-  api-key: 112336228919127
-  api-secret: -ShGCMOU0ZCOcZJIis2UrM9HwLw
-  cloud-name: drdbkkodu
+  api-key: 
+  api-secret: 
+  cloud-name: 
 
 spring:
   redis:
