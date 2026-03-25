@@ -8,6 +8,7 @@ import com.sky.vo.DishItemVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,10 @@ public class SetmealController {
      */
     @GetMapping("/list")
     @Operation(description = "根据分类id查询套餐")
+    @Cacheable(cacheNames = "setmealCache",key = "#categoryId") //key: "setmealCache::categoryId"
+    //cacheable 注解的作用是可以缓存查询结果，下次查询时，会从缓存中获取，而不会执行方法体中的代码，
+    //首先这个会先查找这个setmealCache::categoryId再redis里面，如果找到了，就会返回，
+    //如果没有找到，那么会调用这个方法，然后把这个method的返回结构封装进redis,这里的value是result这个对象
     public Result<List<Setmeal>> list(Long categoryId) {
         Setmeal setmeal = new Setmeal();
         setmeal.setCategoryId(categoryId);
