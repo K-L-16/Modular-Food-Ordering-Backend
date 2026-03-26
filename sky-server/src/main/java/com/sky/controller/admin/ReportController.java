@@ -2,7 +2,10 @@ package com.sky.controller.admin;
 
 import com.sky.result.Result;
 import com.sky.service.ReportService;
+import com.sky.vo.OrderReportVO;
+import com.sky.vo.SalesTop10ReportVO;
 import com.sky.vo.TurnoverReportVO;
+import com.sky.vo.UserReportVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -42,4 +45,59 @@ public class ReportController {
         log.info("营业额统计：{}到{}", begin, end);
         return Result.success(reportService.getTurnoverStatistics(begin, end));
     }
+
+
+    @GetMapping("/userStatistics")
+    @Operation(summary = "用户统计")
+    public Result<UserReportVO> userStatistics(
+            @RequestParam("begin")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @RequestParam("end")
+            @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end
+    ){
+        log.info("用户统计：{}到{}", begin, end);
+        return Result.success(reportService.getUserStatistics(begin, end));
+    }
+
+    /**
+     * 订单统计
+     * @param begin
+     * @param end
+     * @return
+     */
+    @GetMapping("/ordersStatistics")
+    @Operation(summary = "订单统计")
+    public Result<OrderReportVO> ordersStatistics(
+            @RequestParam("begin")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @RequestParam("end")
+            @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end
+    ){
+        log.info("订单统计：{}到{}", begin, end);
+        return Result.success(reportService.getOrdersStatistics(begin, end));
+    }
+
+
+    /**
+     * 订单统计
+     * @param begin
+     * @param end
+     * @return
+     */
+    @GetMapping("/top10")
+    @Operation(summary = "销量排名top10")
+    public Result<SalesTop10ReportVO> top10(
+            @RequestParam("begin")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @RequestParam("end")
+            @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end
+    ){
+        log.info("销量排名top10：{}到{}", begin, end);
+        return Result.success(reportService.getSalesTop10(begin, end));
+    }
+
+
+
+
+
 }
